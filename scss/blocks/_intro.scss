@@ -1,0 +1,30 @@
+@use "../veriables";
+@use "../mixins" as m;
+
+/* Intro */
+
+.intro {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.intro__heading {
+  margin: 0;
+}
+
+.intro__img {
+  width: 100%;
+}
+
+@include m.responsive(768px) {
+  .intro {
+    padding-bottom: 50px;
+  }
+}
+
+@include m.responsive(1024px) {
+  .intro {
+    padding-top: 0;
+    padding-bottom: 80px;
+  }
+}

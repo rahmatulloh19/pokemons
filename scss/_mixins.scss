@@ -1,0 +1,21 @@
+@mixin unstyled-list {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+@mixin default-text($mb, $fz:16px, $fw:400, $lh:normal) {
+  margin-top: 0;
+  margin-bottom: $mb;
+  font-size: $fz;
+  font-weight: $fw;
+  line-height: $lh;
+}
+
+
+@mixin responsive($miw) {
+  @media only screen and (min-width: $miw) {
+    @content;
+  }
+}
