@@ -1,52 +1,73 @@
 // Listni DOM dan olib keldik
 var elList = document.querySelector(".js-pokemons__list");
 
+/!Ushbu siteni semantika bo'yicha yozganimiz uchun codemiz ko'payib ketgan*/
+
 pokemons.forEach(function(item) {
   
-  // Elementlarni yasab olamiz
+  // Elementlarni yasab olamiz va shu vaqtni o'zida classlarni qo'shib oldik
   var liElement = document.createElement("li");
   liElement.classList.add("pokemons__item");
   
   var headingWrapperElement = document.createElement("div");
-  headingWrapperElement.classList.add("pokemons__subheading-wrapper")
+  headingWrapperElement.classList.add("pokemons__subheading-wrapper");
+
   var headingElement = document.createElement("h3");
   headingElement.classList.add("pokemons__subheading");
+
   var headingOutputElement = document.createElement("output");
   headingOutputElement.classList.add("pokemons__subheading-text");
 
   var liInnerElement = document.createElement("div");
   liInnerElement.classList.add("pokemons__item-inner");
+
   var liImgElement = document.createElement("div");
   liImgElement.classList.add("pokemons__item-img");
+
   var liContentElement = document.createElement("div");
   liContentElement.classList.add("pokemons__item-content");
+  
   var liDataElement = document.createElement("div");
   liDataElement.classList.add("pokemons__data-wrapper");
+  
   var liWeightElement = document.createElement("output");
   liWeightElement.classList.add("pokemons__weight");
+
   var liStrongWeightElement = document.createElement("strong");
   liStrongWeightElement.classList.add("pokemons__bold");
+
   var liHeightElement = document.createElement("output");
   liHeightElement.classList.add("pokemons__height");
+
   var liStrongHeightElement = document.createElement("strong");
   liStrongHeightElement.classList.add("pokemons__bold");
+
   var growElement = document.createElement("div");
   growElement.classList.add("pokemens__grow");
+  
   var liDataBottomElement = document.createElement("div");
   liDataBottomElement.classList.add("pokemons__data-wrapper");
+
   var liEggElement = document.createElement("output");
   liEggElement.classList.add("pokemons__eggs");
+
   var liEggStrongElement = document.createElement("strong");
   liEggStrongElement.classList.add("pokemons__bold");
+
   var liTypeElement = document.createElement("output");
   liTypeElement.classList.add("pokemons__type");
+
   var liTypeStrongElement = document.createElement("strong");
   liTypeStrongElement.classList.add("pokemons__bold");
   
+  // h3 ga textContent o'zlashtirdik
   headingOutputElement.textContent = item.name;
 
+  // rasmlarni background image bo'lgani uchun shu kabi o'zlashtirdik
   liImgElement.style.backgroundImage = `url("${item.img}")`;
 
+
+  // pokemons js dan kelayotgan ma'lumotlarni DOM ga olib chiqish uchun textContentiga o'zlashtirdik
   liWeightElement.textContent = `${item.weight} kg`;
   liStrongWeightElement.textContent = `Weght: `;
 
@@ -59,6 +80,7 @@ pokemons.forEach(function(item) {
   liTypeElement.textContent = item.type;
   liTypeStrongElement.textContent = `Type: `;
 
+  // yasalgan elementlarni bir biriga bog'lashni boshladik
   liElement.appendChild(headingWrapperElement);
   liElement.appendChild(liInnerElement);
 
