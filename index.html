@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="images/pokemonswebp.webp" type="image/x-icon">k
+  <link rel="shortcut icon" href="images/pokemonswebp.webp" type="image/x-icon">
   <link rel="stylesheet" href="./css/main.css">
   <title>Pokemons</title>
 </head>
@@ -21,6 +21,9 @@
           alt="Wrote pokemon"
           srcset="./images/pokemon.png  1x, ./images/pokemon@2x.png  2x">
         </h1>
+        <form class="intro__form" autocomplete="off">
+          <input class="intro__search js-intro__search" type="text" name="user_search" placeholder="Search..."  minlength="1" maxlength="15">
+        </form>
       </div>
     </section>
     <section class="site-main__pokemons pokemons">
@@ -37,3 +40,7 @@
   <script src="./js/main.js"></script>
 </body>
 </html>
+
+<!-- // let  width = window.getComputedStyle(liElement).width;
+  
+  //  console.log(width); -->

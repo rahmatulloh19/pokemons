@@ -217,12 +217,6 @@ img {
   height: auto;
 }
 
-.gradient {
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -255,22 +249,75 @@ img {
 }
 
 .intro__heading {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 30px;
 }
 
 .intro__img {
   width: 100%;
 }
 
+.intro__form {
+  display: grid;
+  grid-template-columns: 1fr;
+  -webkit-column-gap: 25px;
+     -moz-column-gap: 25px;
+          column-gap: 25px;
+}
+
+.intro__search {
+  padding: 8px;
+  border-radius: 10px;
+  background-color: #e8dd78;
+  border: 3px solid #928303;
+  outline: none;
+}
+.intro__search:focus {
+  border: 3px solid #928303;
+  background-color: #ede6a8;
+}
+.intro__search::-webkit-input-placeholder {
+  color: #fff;
+}
+.intro__search::-moz-placeholder {
+  color: #fff;
+}
+.intro__search:-ms-input-placeholder {
+  color: #fff;
+}
+.intro__search::-ms-input-placeholder {
+  color: #fff;
+}
+.intro__search::placeholder {
+  color: #fff;
+}
+
 @media only screen and (min-width: 768px) {
   .intro {
     padding-bottom: 50px;
+  }
+  .intro__heading {
+    margin-bottom: 0;
+  }
+  .intro__form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .intro__search {
+    padding: 12px;
   }
 }
 @media only screen and (min-width: 1024px) {
   .intro {
     padding-top: 0;
     padding-bottom: 80px;
+  }
+  .intro__form {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .intro__form {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 /* Pokemons styles started */
@@ -348,10 +395,6 @@ img {
   z-index: -1;
   width: 100%;
   height: 100%;
-  background-image: url("http://www.serebii.net/pokemongo/pokemon/001.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
   opacity: 1;
   -webkit-transition: opacity 0.5s ease;
   transition: opacity 0.5s ease;

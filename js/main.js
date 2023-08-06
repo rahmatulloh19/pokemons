@@ -1,110 +1,66 @@
-// Listni DOM dan olib keldik
-var elList = document.querySelector(".js-pokemons__list");
+const elSearch = document.querySelector(".js-intro__search");
+const elList = document.querySelector(".js-pokemons__list");
 
-/!Ushbu siteni semantika bo'yicha yozganimiz uchun codemiz ko'payib ketgan*/
-
-pokemons.forEach(function(item) {
+// Render of pokemons array
+function renderPokemons (array) {
+  elList.innerHTML = "";
   
-  // Elementlarni yasab olamiz va shu vaqtni o'zida classlarni qo'shib oldik
-  var liElement = document.createElement("li");
-  liElement.classList.add("pokemons__item");
+  array.forEach(function(item) {
+    // Making elements and giving thier classes
+    const liElement = document.createElement("li");
+    liElement.classList.add("pokemons__item");
+    const headingWrapperElement = document.createElement("div");
+    headingWrapperElement.classList.add("pokemons__subheading-wrapper");
+    const headingElement = document.createElement("h3");
+    headingElement.classList.add("pokemons__subheading");
+    const innerElement = document.createElement("div");
+    innerElement.classList.add("pokemons__item-inner");
+    const imgElement = document.createElement("img");
+    imgElement.classList.add("pokemons__item-img")
+    const contentElement = document.createElement("div");
+    contentElement.classList.add("pokemons__item-content");
+    
+    contentElement.innerHTML = `<div class="pokemons__data-wrapper">
+    <output class="pokemons__weight">
+    <strong class="pokemons__bold">Weight: </strong>${item.weight} kg
+    </output>
+    <output class="pokemons__height"><strong class="pokemons__bold">Height: </strong>${item.height} m
+    </output>
+    </div>
+    <div class="pokemens__grow"></div>
+    <div class="pokemons__data-wrapper">
+    <output class="pokemons__eggs"><strong class="pokemons__bold">Eggs: </strong>${item.egg} km
+    </output>
+    <output class="pokemons__type"><strong class="pokemons__bold">Type: </strong>${item.type}
+    </output>
+    </div>`
+
+    imgElement.setAttribute("src", item.img);
+    imgElement.setAttribute("width", 120);
+    imgElement.setAttribute("height", 120);
+    imgElement.setAttribute("alt", `The picture of ${item.name}`);
   
-  var headingWrapperElement = document.createElement("div");
-  headingWrapperElement.classList.add("pokemons__subheading-wrapper");
+    // Giving names
+    headingElement.innerHTML = `<output class="pokemons__subheading-text">${item.name}</output>`
+    
+    // appened li's childiren
+    liElement.append(headingWrapperElement, innerElement);
+    headingWrapperElement.appendChild(headingElement);
+    innerElement.append(imgElement ,contentElement);
+    
+    elList.appendChild(liElement);
+  });
+}
 
-  var headingElement = document.createElement("h3");
-  headingElement.classList.add("pokemons__subheading");
+elSearch.addEventListener("keyup", function() {
+  let elSearchValue = elSearch.value.trim().toLowerCase();
 
-  var headingOutputElement = document.createElement("output");
-  headingOutputElement.classList.add("pokemons__subheading-text");
+  let finder = pokemons.filter(function(item) {
+    let search_pokemon = item.name.toLowerCase();
+    return search_pokemon.includes(elSearchValue);
+  })
 
-  var liInnerElement = document.createElement("div");
-  liInnerElement.classList.add("pokemons__item-inner");
+  renderPokemons(finder);
+})
 
-  var liImgElement = document.createElement("div");
-  liImgElement.classList.add("pokemons__item-img");
-
-  var liContentElement = document.createElement("div");
-  liContentElement.classList.add("pokemons__item-content");
-  
-  var liDataElement = document.createElement("div");
-  liDataElement.classList.add("pokemons__data-wrapper");
-  
-  var liWeightElement = document.createElement("output");
-  liWeightElement.classList.add("pokemons__weight");
-
-  var liStrongWeightElement = document.createElement("strong");
-  liStrongWeightElement.classList.add("pokemons__bold");
-
-  var liHeightElement = document.createElement("output");
-  liHeightElement.classList.add("pokemons__height");
-
-  var liStrongHeightElement = document.createElement("strong");
-  liStrongHeightElement.classList.add("pokemons__bold");
-
-  var growElement = document.createElement("div");
-  growElement.classList.add("pokemens__grow");
-  
-  var liDataBottomElement = document.createElement("div");
-  liDataBottomElement.classList.add("pokemons__data-wrapper");
-
-  var liEggElement = document.createElement("output");
-  liEggElement.classList.add("pokemons__eggs");
-
-  var liEggStrongElement = document.createElement("strong");
-  liEggStrongElement.classList.add("pokemons__bold");
-
-  var liTypeElement = document.createElement("output");
-  liTypeElement.classList.add("pokemons__type");
-
-  var liTypeStrongElement = document.createElement("strong");
-  liTypeStrongElement.classList.add("pokemons__bold");
-  
-  // h3 ga textContent o'zlashtirdik
-  headingOutputElement.textContent = item.name;
-
-  // rasmlarni background image bo'lgani uchun shu kabi o'zlashtirdik
-  liImgElement.style.backgroundImage = `url("${item.img}")`;
-
-
-  // pokemons js dan kelayotgan ma'lumotlarni DOM ga olib chiqish uchun textContentiga o'zlashtirdik
-  liWeightElement.textContent = `${item.weight} kg`;
-  liStrongWeightElement.textContent = `Weght: `;
-
-  liHeightElement.textContent = `${item.height} m`;
-  liStrongHeightElement.textContent = `Height: `;
-
-  liEggElement.textContent = item.egg;
-  liEggStrongElement.textContent = `Eggs: `;
-
-  liTypeElement.textContent = item.type;
-  liTypeStrongElement.textContent = `Type: `;
-
-  // yasalgan elementlarni bir biriga bog'lashni boshladik
-  liElement.appendChild(headingWrapperElement);
-  liElement.appendChild(liInnerElement);
-
-  headingWrapperElement.appendChild(headingElement);
-  headingElement.appendChild(headingOutputElement);
-
-  liInnerElement.appendChild(liImgElement);
-  liInnerElement.appendChild(liContentElement);
-
-  liContentElement.appendChild(liDataElement);
-  liContentElement.appendChild(growElement);
-  liContentElement.appendChild(liDataBottomElement);
-
-  liDataElement.appendChild(liWeightElement);
-  liWeightElement.prepend(liStrongWeightElement);
-
-  liDataElement.appendChild(liHeightElement);
-  liHeightElement.prepend(liStrongHeightElement);
-
-  liDataBottomElement.appendChild(liEggElement);
-  liEggElement.prepend(liEggStrongElement);
-
-  liDataBottomElement.appendChild(liTypeElement);
-  liTypeElement.prepend(liTypeStrongElement);
-  
-  elList.appendChild(liElement)
-});
+renderPokemons(pokemons);
