@@ -36,11 +36,32 @@
     </section>
   </main>
   
-  <script src="./js/pokemons.js"></script>
-  <script src="./js/main.js"></script>
-</body>
-</html>
-
-<!-- // let  width = window.getComputedStyle(liElement).width;
   
-  //  console.log(width); -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal__dialog modal-dialog">
+      <div class="modal__content modal-content">
+        <div class="modal__header modal-header">
+          <h1 class="modal__title modal-title fs-3 js-modal__title" id="exampleModalLabel"></h1>
+          <button type="button" class="modal__btn btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill="currentColor"><path d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/></svg>
+          </button>
+        </div>
+        <div class="modal__body modal-body js-modal__body"></div>
+        <div class="modal__footer modal-footer fs-5">
+          <!-- Evolutions
+          <div class="modal__btn-wrapper">
+            <button type="button" class="modal__btn btn btn-secondary">&larr; Prev evolution (Ivysaur)</button>
+            <button type="button" class="modal__btn btn btn-success">Next evolution (Ivysaur) &rarr;</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <script src="./js/pokemons.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+  </html>

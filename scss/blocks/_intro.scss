@@ -29,9 +29,12 @@
   background-color: #e8dd78;
   border: 3px solid #928303;
   outline: none;
+  transition: box-shadow 0.3s ease;
+
   &:focus {
     border: 3px solid #928303;
     background-color: #ede6a8;
+    box-shadow: #abc4ff 0 0 20px 6px;
   }
   &::placeholder {
     color: #fff;
