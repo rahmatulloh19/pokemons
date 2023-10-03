@@ -13659,14 +13659,14 @@ img {
 .intro__form {
   display: grid;
   grid-template-columns: 1fr;
-  -webkit-column-gap: 25px;
-     -moz-column-gap: 25px;
-          column-gap: 25px;
+  gap: 25px;
 }
 
-.intro__search {
+.intro__components {
   padding: 8px;
   border-radius: 10px;
+  font-weight: 500;
+  color: #000;
   background-color: #e8dd78;
   border: 3px solid #928303;
   outline: none;
@@ -13675,37 +13675,100 @@ img {
   transition: box-shadow 0.3s ease;
   transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
 }
-.intro__search:focus {
+.intro__components:focus {
   border: 3px solid #928303;
   background-color: #ede6a8;
   -webkit-box-shadow: #abc4ff 0 0 20px 6px;
           box-shadow: #abc4ff 0 0 20px 6px;
 }
-.intro__search::-webkit-input-placeholder {
-  color: #fff;
-}
-.intro__search::-moz-placeholder {
-  color: #fff;
-}
-.intro__search:-ms-input-placeholder {
-  color: #fff;
-}
-.intro__search::-ms-input-placeholder {
-  color: #fff;
-}
-.intro__search::placeholder {
-  color: #fff;
+
+.intro__types-label {
+  position: relative;
+  display: none;
+  width: 100%;
 }
 
+.intro__type {
+  width: 100%;
+}
+
+.intro__btn-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 25px;
+}
+
+.intro__submit-btn {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.intro__filter-btn {
+  width: 45px;
+  background-color: #b3afaf;
+  background-image: url("../../images/filter.png");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: center;
+}
+.intro__filter-btn:focus {
+  -webkit-box-shadow: #d8deeb 0 0 20px 0px;
+          box-shadow: #d8deeb 0 0 20px 0px;
+  background-color: #ddd9d9;
+}
+
+.intro__types {
+  display: none;
+  position: absolute;
+  top: 100%;
+  z-index: 1;
+  max-height: 250px;
+  width: 100%;
+  background-color: #e8dd78;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  border: 3px solid #928303;
+  border-radius: 10px;
+  overflow: auto;
+  color: #000;
+  font-weight: 500;
+}
+
+.display-block {
+  display: block;
+}
+
+.border--top {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-color: transparent;
+}
+
+.border--bottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.intro__types-item {
+  padding: 8px;
+  border-bottom: 2px solid #777;
+}
+
+@media only screen and (min-width: 620px) {
+  .intro__form {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 @media only screen and (min-width: 768px) {
   .intro {
     padding-bottom: 50px;
   }
   .intro__heading {
     margin-bottom: 0;
-  }
-  .intro__form {
-    grid-template-columns: 1fr 1fr;
   }
   .intro__search {
     padding: 12px;
@@ -13718,6 +13781,14 @@ img {
   }
   .intro__form {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .intro__types-label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .intro__components {
+    font-size: 18px;
   }
 }
 @media only screen and (min-width: 1280px) {
@@ -13771,6 +13842,13 @@ img {
           box-shadow: #abc4ff 0 0 20px 3px;
 }
 
+.pokemons__item--not-found {
+  height: 300px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #777;
+}
+
 .pokemons__subheading-wrapper {
   margin-bottom: 3px;
   padding: 12px 0;
@@ -13786,6 +13864,11 @@ img {
   font-size: 18px;
   font-weight: 700;
   line-height: 130%;
+}
+
+.pokemons__find {
+  background-color: #ffa500;
+  border-radius: 3px;
 }
 
 .pokemons__item-inner {
@@ -13904,7 +13987,12 @@ img {
 }
 
 .pokemons__bold {
+  text-align: left;
   font-weight: 500;
+}
+
+.pokemons__bold-left {
+  text-align: right;
 }
 
 @media only screen and (min-width: 620px) {
@@ -14009,9 +14097,13 @@ img {
       -ms-flex-direction: column;
           flex-direction: column;
   row-gap: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
 }
 
-.modal__out {
+.modal__item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -14028,11 +14120,11 @@ img {
   -webkit-transition: background-color 0.5s ease;
   transition: background-color 0.5s ease;
 }
-.modal__out:hover {
+.modal__item:hover {
   color: #fff;
   background-color: rgba(119, 119, 119, 0.5647058824);
 }
-.modal__out:hover .modal__bold {
+.modal__item:hover .modal__bold {
   color: #fff;
 }
 
@@ -14049,9 +14141,12 @@ img {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   margin: 3px 0 0;
   font-weight: 500;
   border-top: 3px solid transparent;
+  background-color: #fee300;
 }
 
 .modal__btn-wrapper {

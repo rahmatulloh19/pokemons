@@ -29,6 +29,13 @@
   }
 }
 
+.pokemons__item--not-found {
+  height: 300px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #777;
+}
+
 .pokemons__subheading-wrapper {
   margin-bottom: 3px;
   padding: 12px 0;
@@ -40,6 +47,11 @@
 
 .pokemons__subheading {
   @include m.default-text(0, 18px, 700, 130%);
+}
+
+.pokemons__find {
+  background-color: #ffa500;
+  border-radius: 3px;
 }
 
 .pokemons__item-inner {
@@ -123,7 +135,11 @@
 }
 
 .pokemons__bold {
+  text-align: left;
   font-weight: 500;
+}
+.pokemons__bold-left {
+  text-align: right;
 }
 
 @include m.responsive(620px) {

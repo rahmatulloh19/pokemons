@@ -20,26 +20,97 @@
 .intro__form {
   display: grid;
   grid-template-columns: 1fr;
-  column-gap: 25px;
+  gap: 25px;
 }
 
-.intro__search {
+.intro__components {
   padding: 8px;
   border-radius: 10px;
+  font-weight: 500;
+  color: #000;
   background-color: #e8dd78;
   border: 3px solid #928303;
   outline: none;
   transition: box-shadow 0.3s ease;
-
   &:focus {
     border: 3px solid #928303;
     background-color: #ede6a8;
     box-shadow: #abc4ff 0 0 20px 6px;
   }
-  &::placeholder {
-    color: #fff;
+}
+
+.intro__types-label {
+  position: relative;
+  display: none;
+  width: 100%;
+}
+
+.intro__type {
+  width: 100%;
+}
+
+.intro__btn-wrapper {
+  display: flex;
+  gap: 25px;
+}
+
+.intro__submit-btn {
+  flex-grow: 1;
+}
+
+.intro__filter-btn {
+  width: 45px;
+  background-color: #b3afaf;
+  background-image: url("../../images/filter.png");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: center;
+  &:focus {
+    box-shadow: #d8deeb 0 0 20px 0px;
+    background-color: #ddd9d9;
   }
 }
+
+.intro__types {
+  display: none;
+  position: absolute;
+  top: 100%;
+  z-index: 1;
+  max-height: 250px;
+  width: 100%;
+  background-color: #e8dd78;
+  @include m.unstyled-list;
+  border: 3px solid #928303;
+  border-radius: 10px;
+  overflow: auto;
+  color: #000;
+  font-weight: 500;
+}
+.display-block {
+  display: block;
+}
+
+.border--top {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-color: transparent;
+}
+
+.border--bottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.intro__types-item {
+  padding: 8px;
+  border-bottom: 2px solid #777;
+}
+
+@include m.responsive(620px) {
+  .intro__form {
+    grid-template-columns: 1fr 1fr;
+  }
+} 
 
 @include m.responsive(768px) {
   .intro {
@@ -48,9 +119,7 @@
   .intro__heading {
     margin-bottom: 0;
   }
-  .intro__form {
-    grid-template-columns: 1fr 1fr;
-  }
+  
   .intro__search {
     padding: 12px;
   }
@@ -63,6 +132,12 @@
   }
   .intro__form {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .intro__types-label {
+    display: flex;
+  }
+  .intro__components {
+    font-size: 18px;
   }
 }
 

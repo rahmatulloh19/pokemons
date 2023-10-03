@@ -10,7 +10,7 @@ const pokemons = [
 		"height": 0.71,
 		"weight": 6.9,
 		"candy": "Bulbasaur Candy",
-		// "candy_count": 25,
+		"candy_count": 25,
 		"egg": "2 km",
 		"spawn_chance": 0.69,
 		"avg_spawns": 69,
@@ -24,16 +24,16 @@ const pokemons = [
 			"Flying",
 			"Psychic"
 		],
-		// "next_evolution": [
-		// 	{
-		// 		"num": "002",
-		// 		"name": "Ivysaur"
-		// 	},
-		// 	{
-		// 		"num": "003",
-		// 		"name": "Venusaur"
-		// 	}
-		// ]
+		"next_evolution": [
+			{
+				"num": "002",
+				"name": "Ivysaur"
+			},
+			{
+				"num": "003",
+				"name": "Venusaur"
+			}
+		]
 	},
 	{
 		"id": 2,

@@ -1,3 +1,5 @@
+@use "../mixins" as m;
+
 /* Modal styles started */
 
 .modal-content {
@@ -45,9 +47,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+  @include m.unstyled-list;
 }
 
-.modal__out {
+.modal__item {
   display: flex;
   justify-content: space-between;
   padding: 8px;
@@ -73,9 +76,11 @@
 .modal__footer {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   margin: 3px 0 0;
   font-weight: 500;
   border-top: 3px solid transparent;
+  background-color: #fee300;
 }
 
 .modal__btn-wrapper {
