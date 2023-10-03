@@ -13692,6 +13692,55 @@ img {
   width: 100%;
 }
 
+.intro__radios-label {
+  display: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: #625906;
+}
+
+.intro__radios {
+  display: grid;
+  place-content: center;
+  width: 24px;
+  height: 24px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin: 0;
+  color: #000;
+  background-color: #edefbe;
+  border: 2.5px solid #928303;
+  border-radius: 50%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  -webkit-transform: translateY(-0.075em);
+          transform: translateY(-0.075em);
+}
+.intro__radios:checked::before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.intro__radios::before {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms transform ease-in-out;
+  transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
+  -webkit-box-shadow: inset 16px 16px #0062b1;
+          box-shadow: inset 16px 16px #0062b1;
+  content: "";
+}
+
 .intro__btn-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13755,7 +13804,14 @@ img {
 
 .intro__types-item {
   padding: 8px;
+  background-color: #e8dd78;
   border-bottom: 2px solid #777;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+.intro__types-item:hover {
+  background-color: #d3bb02;
+  color: #fff;
 }
 
 @media only screen and (min-width: 620px) {
@@ -13794,6 +13850,27 @@ img {
 @media only screen and (min-width: 1280px) {
   .intro__form {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .intro__radios-label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    row-gap: 3px;
+  }
+  .intro__radios-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 /* Pokemons styles started */

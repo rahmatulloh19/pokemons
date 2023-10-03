@@ -1,4 +1,5 @@
-const elSearch = document.querySelector(".js-intro__search");
+const elControlForm = document.querySelector(".js-intro__form")
+const elSearch = elControlForm.querySelector(".js-intro__search");
 const elList = document.querySelector(".js-pokemons__list");
 const modalTitle = document.querySelector(".js-modal__title");
 const modalBody = document.querySelector(".js-modal__body");
@@ -14,8 +15,6 @@ const elItemFragment = document.createDocumentFragment();
 const elPokemonsTypeList = document.querySelector(".js-intro__types");
 // input select pokemons
 const elInputPokemonsType = document.querySelector(".js-intro__type");
-
-
 
 renderPokemons(pokemons, elList);
 
@@ -237,17 +236,15 @@ elInputPokemonsType.addEventListener("keyup", () => {
     
     return lowerCaseItems.includes(elInputPokemonsType.value.trim().toLowerCase())
   })
-  if(searchingPokemonType.length == 0) {
-    // elPokemonsTypeList.classList.remove("display-block", "border--top");
-    // elInputPokemonsType.classList.remove("border--bottom");
-    elPokemonsTypeList.innerHTML = "Iltimos, to'g'ri kiriting"
-    console.log(searchingPokemonType.length === 0);
-  } else {
-    elPokemonsTypeList.classList.add("display-block", "border--top");
-    elInputPokemonsType.classList.add("border--bottom");
-  }
+  // if(searchingPokemonType.length == 0) {
+  //   elPokemonsTypeList.classList.remove("display-block", "border--top");
+  //   elInputPokemonsType.classList.remove("border--bottom");
+  // } else {
+  //   elPokemonsTypeList.classList.add("display-block", "border--top");
+  //   elInputPokemonsType.classList.add("border--bottom");
+  // }
   
-  renderPokemons(searchingPokemonType, elPokemonsTypeList)
+  sorterPokemons(undefined, searchingPokemonType, elPokemonsTypeList);
 })
 
 
@@ -255,10 +252,39 @@ const weaknessesPokemons = [];
 
 pokemons.forEach(item => {
   item.weaknesses.forEach(element => {
-    if(!weaknessesPokemons.includes(element)) {
-      weaknessesPokemons.push(element)
-    }
+    if(!weaknessesPokemons.includes(element)) weaknessesPokemons.push(element);
   })
 })
 
-console.log(weaknessesPokemons);
+function sorterPokemons(value = "default", array = pokemons, node) {
+  if(value == "default") {
+    const sortedPokemons = array.sort((a, b) => {
+      const aCharCode = a.name?.charCodeAt(0) || a.charCodeAt(0);
+      const bCharCode = b.name?.charCodeAt(0) || b.charCodeAt(0);
+      
+      return aCharCode - bCharCode;
+    })
+    renderPokemons(sortedPokemons, node)
+  }
+  if(value == "reverse") {
+    const sortedPokemons = array.sort((a, b) => {
+      const aCharCode = a.name?.charCodeAt(0) || a.charCodeAt(0);
+      const bCharCode = b.name?.charCodeAt(0) || b.charCodeAt(0);
+      
+      return bCharCode - aCharCode;
+    })
+    renderPokemons(sortedPokemons, node)
+  }
+}
+
+const radiosElements = elControlForm.querySelectorAll(".intro__radios");
+radiosElements.forEach(item => {
+  item.addEventListener("change", evt => {
+    const radioValue = evt.target.value;
+    if(radioValue == "from_A_to_Z") {
+      sorterPokemons("default", undefined, elList)
+    } else if(radioValue == "from_Z_to_A") {
+      sorterPokemons("reverse", undefined, elList)
+    }
+  })
+})
