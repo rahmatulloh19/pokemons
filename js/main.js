@@ -73,20 +73,25 @@ function renderPokemons (array, node) {
 renderPokemons(pokemons, elList)
 
 function renderModal(obj, prevObj) {
+  modalBody.innerHTML = ''
   modalTitle.textContent = obj.name;
   // Checking pokemons array which is have a candy count property
+  const elInfoList = document.createElement("ul");
+  elInfoList.classList.add("modal__list");
   if(obj.candy_count) {
-    modalBody.innerHTML = `<li class="modal__item"><strong class="modal__bold">Candy:</strong> ${obj.candy}</li>
+    elInfoList.innerHTML = `<li class="modal__item"><strong class="modal__bold">Candy:</strong> ${obj.candy}</li>
     <li class="modal__item"><strong class="modal__bold">Avg Spawns:</strong> ${obj.avg_spawns}</li>
     <li class="modal__item"><strong class="modal__bold">Spawn time:</strong> ${obj.spawn_time}</li>
     <li class="modal__item"><strong class="modal__bold">Weaknesses:</strong> ${obj.weaknesses.join(", ")}</li>
     <li class="modal__item"><strong class="modal__bold">Candy count:</strong> ${obj.candy_count}</li>`
   } else  {
-    modalBody.innerHTML = `<li class="modal__item"><strong class="modal__bold">Candy:</strong> ${obj.candy}</li>
+    elInfoList.innerHTML = `<li class="modal__item"><strong class="modal__bold">Candy:</strong> ${obj.candy}</li>
     <li class="modal__item"><strong class="modal__bold">Avg Spawns:</strong> ${obj.avg_spawns}</li>
     <li class="modal__item"><strong class="modal__bold">Spawn time:</strong> ${obj.spawn_time}</li>
     <li class="modal__item"><strong class="modal__bold">Weaknesses:</strong> ${obj.weaknesses.join(", ")}</li>`
   }
+  modalBody.appendChild(elInfoList);
+  modalFooter.innerHTML = "";
   // secondModalTitle.textContent = prevObj.name;
   // Checking pokemons array which is have a candy count property
   // if(obj.candy_count) {
@@ -178,6 +183,7 @@ elSearch.addEventListener("keyup", function() {
 elList.addEventListener("click", (evt) => {
   const targetId = evt.target.dataset.id;
   const linkObj = pokemons.find(item => item.id == targetId);
+  
   // const prevObj = pokemons.find(item => item.id == linkObj.id - 1);
   // const nextObj = pokemons.find(item => item.id == linkObj.id + 1);
   
@@ -288,32 +294,21 @@ elFilterBtn.addEventListener("click", () => {
   modalTitle.textContent = "Search settings";
   
   // modal body
+  modalBody.innerHTML = "";
+  const modalForm = document.createElement("form");
+  modalForm.classList.add("js-modal__body--form")
   const cloneFormComponents = elComponentsForm.cloneNode(true);
   const pokemonTypesInput = cloneFormComponents.querySelector(".intro__types-label");
   pokemonTypesInput.classList.add("intro__types--filter");
   const pokemonSortInput = cloneFormComponents.querySelector(".intro__radios-label");
-  pokemonSortInput.classList.add("intro__radios-label--filter")
-  modalBody.append(pokemonTypesInput, pokemonSortInput);
-  replaceTag(".modal__body");
+  pokemonSortInput.classList.add("intro__radios-label--filter");
+  modalForm.append(pokemonTypesInput, pokemonSortInput);
+  modalBody.appendChild(modalForm);
   
   // modal footer
   modalFooter.classList.add("modal__footer-filter");
   modalFooter.innerHTML = `<button class="intro__components intro__modal-btn" type="submit" form="control-form" data-bs-dismiss="modal">Search</button>`
 })
-
-// this copied function isn't mine
-function replaceTag(classes){
-  const that = document.querySelector(classes);
-  
-  const form = document.createElement('form');
-  form.classList.add(`${classes.slice(1)}`, "modal-body", "js-modal__body", "js-modal__body--form")
-  
-  // move all elements in the other container.
-  while(that.firstChild) {
-    form.appendChild(that.firstChild);
-  }
-  that.parentNode.replaceChild(form, that);
-}
 
 elControlForm.addEventListener("submit", evt => {
   evt.preventDefault();

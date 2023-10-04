@@ -14232,6 +14232,9 @@ img {
       -ms-flex-direction: column;
           flex-direction: column;
   row-gap: 10px;
+}
+
+.modal__list {
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 0;
