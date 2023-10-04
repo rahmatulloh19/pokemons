@@ -12,7 +12,7 @@ const elItemTemplate = document.querySelector(".pokemons__item-template").conten
 const elItemFragment = document.createDocumentFragment();
 
 // list of pokemons type
-const elPokemonsTypeList = document.querySelector(".js-intro__types");
+const elPokemonsTypeList = document.querySelector(".js-intro__target" && ".intro__types");
 // input select pokemons
 const elInputPokemonsType = document.querySelector(".js-intro__type");
 // bring filter btn from DOM
@@ -21,6 +21,8 @@ const elFilterBtn = elControlForm.querySelector(".js-intro__filter-btn");
 const elComponentsForm = document.querySelector(".intro__form-template").content;
 // bring radioElements for sorting
 const radiosElements = document.querySelectorAll(`input[type="radio"]`);
+// search list
+const elSearchList = elControlForm.querySelector(".js-intro__search-list");
 
 renderPokemons(pokemons, elList);
 
@@ -52,20 +54,20 @@ function renderPokemons (array, node) {
       liElement.textContent = "Sorry, no such pokemon found"
       elItemFragment.appendChild(liElement)
     }
-  } else if(node.classList.contains("js-intro__types")) {
+  } else if(node.classList.contains("js-intro__target")) {
     array.forEach(item => {
       const liElement = document.createElement("li");
-      liElement.classList.add("intro__types-item");
-      liElement.textContent = item;
+      liElement.textContent = item.name || item;
+      liElement.classList.add("intro__lists-item");
+      item.name ? liElement.classList.add("intro__lists-item", "intro__lists-item--search") : liElement.classList.add("intro__lists-item");
       elItemFragment.appendChild(liElement);
     })
     if(array.length == 0) {
       const liElement = document.createElement("li");
-      liElement.classList.add("intro__types-item");
+      liElement.classList.add("intro__lists-item");
       liElement.textContent = "Please, search for correct pokemons type";
       elItemFragment.appendChild(liElement);
     }
-    node.appendChild(elItemFragment)
   }
   node.appendChild(elItemFragment)
 }
@@ -168,18 +170,6 @@ function renderModal(obj, prevObj) {
   // }
 }
 
-// Search input codes here
-elSearch.addEventListener("keyup", function() {
-  let elSearchValue = elSearch.value.trim().toLowerCase();
-  
-  let finder = pokemons.filter(function(item) {
-    let search_pokemon = item.name.toLowerCase();
-    return search_pokemon.includes(elSearchValue);  
-  })
-  
-  renderPokemons(finder, elList);
-})
-
 elList.addEventListener("click", (evt) => {
   const targetId = evt.target.dataset.id;
   const linkObj = pokemons.find(item => item.id == targetId);
@@ -224,16 +214,18 @@ pokemons.forEach(item => {
 
 // listening the input for rendering
 document.body.addEventListener("click", evt => {
-  // styling input and list
+  // this variables for rendering form on modal status
   const elFormControlModal = document.querySelector(".js-modal__body--form");
   const elPokemonsTypeModalList = elFormControlModal?.querySelector(".js-intro__types-modal");
   const elInputPokemonsTypeModal = elFormControlModal?.querySelector(".js-intro__type-modal");
+  // styling input and list
   if(evt.target.matches(".js-intro__type")) {
     if(evt.target.classList.contains("js-intro__type-modal")) {
       evt.target.style.position = "relative"
       renderPokemons(pokemonsTypes, elPokemonsTypeModalList);
       elPokemonsTypeModalList.classList.add("display-block", "border--top");
       elInputPokemonsTypeModal.classList.add("border--bottom");
+      
     }
     renderPokemons(pokemonsTypes, elPokemonsTypeList);
     elPokemonsTypeList.classList.add("display-block", "border--top");
@@ -245,8 +237,21 @@ document.body.addEventListener("click", evt => {
     elInputPokemonsTypeModal?.classList.remove("border--bottom");
   }
   
+  if(evt.target.matches(".js-intro__search")) {
+    elSearchList.classList.add("display-block", "border--top");
+    elSearch.classList.add("border--bottom");
+    renderPokemons(pokemons, elSearchList);
+  } else {
+    elSearchList.classList.remove("display-block", "border--top");
+    elSearch.classList.remove("border--bottom");
+  }
+  if(evt.target.matches(".intro__lists-item") && evt.target.matches(".intro__lists-item--search")) {
+    const pokemonName = evt.target.textContent.trim();
+    elSearch.value = pokemonName;
+    return;
+  }
   // getting value
-  if(evt.target.matches(".intro__types-item")) {
+  if(evt.target.matches(".intro__lists-item")) {
     const pokemonTypeName = evt.target.textContent.trim();
     elInputPokemonsType.value = pokemonTypeName;
     if(elInputPokemonsTypeModal) elInputPokemonsTypeModal.value = pokemonTypeName;
@@ -340,22 +345,18 @@ elControlForm.addEventListener("submit", evt => {
   let elRadioValue = "";
   
   // getting style of wrapper radio element
-  const elLabel = document.querySelector(".intro__radios-label")
+  const elLabel = elControlForm.querySelector(".intro__radios-label")
   const styleLabel = getComputedStyle(elLabel);
   const propertyStyle = styleLabel.getPropertyValue("display");
   
-  if(propertyStyle == "none") {
-    for (const iterator of  elRadiosModal) {
+  if(propertyStyle == "none" && elRadiosModal) {
+    for (const iterator of elRadiosModal) {
       if(iterator.checked) elRadioValue = iterator.value;
     }
   } else {
     for (const iterator of  radiosElements) {
       if(iterator.checked) elRadioValue = iterator.value;
     }
-  }
-  // getting values for reopening the modal 
-  if(elRadioValue) {
-    sessionStorage.setItem("pokemonSort", JSON.stringify(elRadioValue));
   }
   
   if(elRadioValue == "from_A_to_Z") {
@@ -364,10 +365,30 @@ elControlForm.addEventListener("submit", evt => {
     sorterPokemons("reverse", undefined, elList)
   }
   
+  // getting values for reopening the modal 
+  if(elRadioValue) {
+    sessionStorage.setItem("pokemonSort", JSON.stringify(elRadioValue));
+  }
+
   if(elPokemonsTypeInputValue || elInputPokemonsType) {
     const selectedType = pokemons.filter(item => item.type.includes(elPokemonsTypeInputValue || elInputPokemonsType.value));
     sessionStorage.setItem("pokemonType", JSON.stringify(elPokemonsTypeInputValue || elInputPokemonsType.value));
     renderPokemons(selectedType, elList)
   }
   
+  // Search input codes here
+  const elSearchValue = elSearch.value.trim();
+  
+  if(elSearchValue) {
+    let elSearchValue = elSearch.value.trim().toLowerCase();
+    
+    let finder = pokemons.filter(function(item) {
+      let search_pokemon = item.name.toLowerCase();
+      return search_pokemon.includes(elSearchValue);
+    })
+    
+    renderPokemons(finder, elList);
+  }
+
+  // codelarni ketma ketligini o'zgartirib abdulaziz akaga ko'rsatishim kerak va typeni search qilsak va alohida pokemonni search qilsak bir vaqtni o'zida manga ko'rsatilgan typeda alohida search qilingan pokemon yo'q digan gap chiqishi kerak
 })

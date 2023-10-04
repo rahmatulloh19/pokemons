@@ -22,10 +22,13 @@
           srcset="./images/pokemon.png  1x, ./images/pokemon@2x.png  2x">
         </h1>
         <form class="intro__form js-intro__form" id="control-form" autocomplete="off">
-          <input class="intro__search js-intro__search intro__components" type="text" name="user_search" placeholder="Search..."  minlength="1" maxlength="15">
-          <label class="intro__types-label">
-            <input class="intro__type js-intro__type intro__components" type="text" name="user_type" placeholder="Pokemons types..." minlength="1" maxlength="15">
-            <ul class="intro__types border--top js-intro__types"></ul> 
+          <label class="intro__search-label intro__labels">
+            <input class="intro__search js-intro__search intro__components intro__input-with-lists" type="text" name="user_search" placeholder="Search..."  minlength="1" maxlength="15">
+            <ul class="intro__search-list js-intro__search-list js-intro__target intro__lists intro__input-lists"></ul>
+          </label>
+          <label class="intro__types-label intro__labels">
+            <input class="intro__type js-intro__type intro__components intro__input-with-lists" type="text" name="user_type" placeholder="Pokemons types..." minlength="1" maxlength="15">
+            <ul class="intro__types js-intro__target intro__lists intro__input-lists"></ul> 
           </label>
           <label class="intro__radios-label">
             <label class="intro__radios-wrapper" for="fromTo">
@@ -44,7 +47,6 @@
             </button>
           </div>
         </form>
-        
       </div>
     </section>
     <section class="site-main__pokemons pokemons">
@@ -114,9 +116,9 @@
     </li>
   </template>
   <template class="intro__form-template">
-    <label class="intro__types-label">
-      <input class="intro__type js-intro__type intro__components js-intro__type-modal" type="text" name="user_type" placeholder="Pokemons types..." minlength="1" maxlength="15" autocomplete="off" >
-      <ul class="intro__types border--top js-intro__types js-intro__types-modal"></ul>
+    <label class="intro__types-label intro__labels">
+      <input class="intro__type js-intro__type intro__components intro__input-with-lists js-intro__type-modal" type="text" name="user_type" placeholder="Pokemons types..." minlength="1" maxlength="15" autocomplete="off" >
+      <ul class="intro__types js-intro__target intro__lists intro__input-lists js-intro__types-modal"></ul>
     </label>
     <label class="intro__radios-label">
       <label class="intro__radios-wrapper" for="fromToModal">

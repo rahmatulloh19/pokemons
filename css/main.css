@@ -13683,18 +13683,70 @@ img {
           box-shadow: #abc4ff 0 0 20px 6px;
 }
 
-.intro__types-label {
+.intro__labels {
   position: relative;
-  display: none;
   width: 100%;
+}
+
+.intro__types-label {
+  display: none;
 }
 
 .intro__types--filter {
   display: block;
 }
 
-.intro__type {
+.intro__input-with-lists {
   width: 100%;
+}
+
+.intro__input-lists {
+  position: absolute;
+  top: 100%;
+  z-index: 1;
+  max-height: 250px;
+  width: 100%;
+  background-color: #e8dd78;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  border: 3px solid #928303;
+  border-radius: 10px;
+  overflow: auto;
+  color: #000;
+  font-weight: 500;
+}
+
+.intro__lists {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.border--top {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-color: transparent;
+}
+
+.border--bottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.intro__lists-item {
+  padding: 8px;
+  background-color: #e8dd78;
+  border-bottom: 2px solid #777;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+.intro__lists-item:hover {
+  background-color: #d3bb02;
+  color: #fff;
 }
 
 .intro__radios-label {
@@ -13814,52 +13866,6 @@ img {
 .intro__filter-img:focus {
   -webkit-transform: rotate(360deg);
           transform: rotate(360deg);
-}
-
-.intro__types {
-  display: none;
-  position: absolute;
-  top: 100%;
-  z-index: 1;
-  max-height: 250px;
-  width: 100%;
-  background-color: #e8dd78;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style: none;
-  border: 3px solid #928303;
-  border-radius: 10px;
-  overflow: auto;
-  color: #000;
-  font-weight: 500;
-}
-
-.display-block {
-  display: block;
-}
-
-.border--top {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-top-color: transparent;
-}
-
-.border--bottom {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.intro__types-item {
-  padding: 8px;
-  background-color: #e8dd78;
-  border-bottom: 2px solid #777;
-  -webkit-transition: background-color 0.3s ease;
-  transition: background-color 0.3s ease;
-}
-.intro__types-item:hover {
-  background-color: #d3bb02;
-  color: #fff;
 }
 
 @media only screen and (min-width: 620px) {
