@@ -52,7 +52,7 @@ function renderPokemons (array, node) {
       liElement.textContent = "Sorry, no such pokemon found"
       elItemFragment.appendChild(liElement)
     }
-  } else if(node == elPokemonsTypeList) {
+  } else if(node.classList.contains("js-intro__types")) {
     array.forEach(item => {
       const liElement = document.createElement("li");
       liElement.classList.add("intro__types-item");
@@ -225,22 +225,31 @@ pokemons.forEach(item => {
 // listening the input for rendering
 document.body.addEventListener("click", evt => {
   // styling input and list
+  const elFormControlModal = document.querySelector(".js-modal__body--form");
+  const elPokemonsTypeModalList = elFormControlModal?.querySelector(".js-intro__types-modal");
+  const elInputPokemonsTypeModal = elFormControlModal?.querySelector(".js-intro__type-modal");
   if(evt.target.matches(".js-intro__type")) {
-    // console.log("bosildi");
+    if(evt.target.classList.contains("js-intro__type-modal")) {
+      evt.target.style.position = "relative"
+      renderPokemons(pokemonsTypes, elPokemonsTypeModalList);
+      elPokemonsTypeModalList.classList.add("display-block", "border--top");
+      elInputPokemonsTypeModal.classList.add("border--bottom");
+    }
     renderPokemons(pokemonsTypes, elPokemonsTypeList);
     elPokemonsTypeList.classList.add("display-block", "border--top");
     elInputPokemonsType.classList.add("border--bottom");
   } else {
     elPokemonsTypeList.classList.remove("display-block", "border--top");
     elInputPokemonsType.classList.remove("border--bottom");
+    elPokemonsTypeModalList.classList.remove("display-block", "border--top");
+    elInputPokemonsTypeModal.classList.remove("border--bottom");
   }
   
   // getting value and rendering they
   if(evt.target.matches(".intro__types-item")) {
     const pokemonTypeName = evt.target.textContent.trim();
     elInputPokemonsType.value = pokemonTypeName;
-    const selectedType = pokemons.filter(item => item.type.includes(pokemonTypeName));
-    renderPokemons(selectedType, elList);
+    elInputPokemonsTypeModal.value = pokemonTypeName;
   }
 })
 
@@ -302,8 +311,20 @@ elFilterBtn.addEventListener("click", () => {
   pokemonTypesInput.classList.add("intro__types--filter");
   const pokemonSortInput = cloneFormComponents.querySelector(".intro__radios-label");
   pokemonSortInput.classList.add("intro__radios-label--filter");
-  modalForm.append(pokemonTypesInput, pokemonSortInput);
+  modalForm.append(pokemonSortInput, pokemonTypesInput);
   modalBody.appendChild(modalForm);
+  // reEnter the modal settings
+  if(sessionStorage.getItem("pokemonType")) {
+    pokemonTypesInput.querySelector(".js-intro__type-modal").value = JSON.parse(sessionStorage.getItem("pokemonType"));
+  }
+  if(sessionStorage.getItem("pokemonSort")) {
+    const sortValue = pokemonSortInput.querySelectorAll(".js-intro__radios");
+    sortValue.forEach(item => {
+      if(item.value == JSON.parse(sessionStorage.getItem("pokemonSort"))) {
+        item.checked = "true"
+      }
+    })
+  }
   
   // modal footer
   modalFooter.classList.add("modal__footer-filter");
@@ -312,15 +333,17 @@ elFilterBtn.addEventListener("click", () => {
 
 elControlForm.addEventListener("submit", evt => {
   evt.preventDefault();
+  
   const elFormControlModal = document.querySelector(".js-modal__body--form");
   const elRadiosModal = elFormControlModal?.querySelectorAll(`input[type="radio"]`);
-  let elRadioValue = "asd";
+  const elPokemonsTypeInputValue = elFormControlModal?.querySelector(".js-intro__type-modal").value;
+  let elRadioValue = "";
   
   // getting style of wrapper radio element
   const elLabel = document.querySelector(".intro__radios-label")
-  const styleLabel = window.getComputedStyle(elLabel);
+  const styleLabel = getComputedStyle(elLabel);
   const propertyStyle = styleLabel.getPropertyValue("display");
-
+  
   if(propertyStyle == "none") {
     for (const iterator of  elRadiosModal) {
       if(iterator.checked) elRadioValue = iterator.value;
@@ -330,11 +353,20 @@ elControlForm.addEventListener("submit", evt => {
       if(iterator.checked) elRadioValue = iterator.value;
     }
   }
+  if(elRadioValue) {
+    sessionStorage.setItem("pokemonSort", JSON.stringify(elRadioValue));
+  }
   
   if(elRadioValue == "from_A_to_Z") {
     sorterPokemons("default", undefined, elList)
   } else if(elRadioValue == "from_Z_to_A") {
     sorterPokemons("reverse", undefined, elList)
+  }
+  
+  if(elPokemonsTypeInputValue) {
+    const selectedType = pokemons.filter(item => item.type.includes(elPokemonsTypeInputValue));
+    sessionStorage.setItem("pokemonType", JSON.stringify(elPokemonsTypeInputValue));
+    renderPokemons(selectedType, elList)
   }
   
 })
