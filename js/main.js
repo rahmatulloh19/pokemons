@@ -219,7 +219,6 @@ pokemons.forEach(item => {
 // listening the input for rendering
 document.body.addEventListener("click", evt => {
   // styling input and list
-  // console.log(evt.target);
   if(evt.target.matches(".js-intro__type")) {
     // console.log("bosildi");
     renderPokemons(pokemonsTypes, elPokemonsTypeList);
@@ -319,7 +318,7 @@ function replaceTag(classes){
 elControlForm.addEventListener("submit", evt => {
   evt.preventDefault();
   const elFormControlModal = document.querySelector(".js-modal__body--form");
-  const elRadiosModal = elFormControlModal.querySelectorAll(`input[type="radio"]`);
+  const elRadiosModal = elFormControlModal?.querySelectorAll(`input[type="radio"]`);
   let elRadioValue = "asd";
   
   // getting style of wrapper radio element
