@@ -13665,6 +13665,7 @@ img {
 .intro__components {
   padding: 8px;
   border-radius: 10px;
+  font-size: 16px;
   font-weight: 500;
   color: #000;
   background-color: #e8dd78;
@@ -13688,6 +13689,10 @@ img {
   width: 100%;
 }
 
+.intro__types--filter {
+  display: block;
+}
+
 .intro__type {
   width: 100%;
 }
@@ -13700,8 +13705,23 @@ img {
   list-style: none;
   font-size: 18px;
   font-weight: 700;
+  line-height: normal;
   letter-spacing: 8px;
   color: #625906;
+}
+
+.intro__radios-label--filter {
+  display: block;
+}
+
+.intro__radios-mark {
+  background-color: transparent;
+  color: #0062b1;
+  font-weight: 700;
+}
+
+.intro__modal-btn {
+  width: 130px;
 }
 
 .intro__radios {
@@ -13757,15 +13777,42 @@ img {
 .intro__filter-btn {
   width: 45px;
   background-color: #b3afaf;
-  background-image: url("../../images/filter.png");
-  background-repeat: no-repeat;
-  background-size: 24px;
-  background-position: center;
+  -webkit-transition: background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
+}
+.intro__filter-btn:hover {
+  -webkit-box-shadow: #d8deeb 0 0 20px 0px;
+          box-shadow: #d8deeb 0 0 20px 0px;
+  background-color: #ddd9d9;
 }
 .intro__filter-btn:focus {
   -webkit-box-shadow: #d8deeb 0 0 20px 0px;
           box-shadow: #d8deeb 0 0 20px 0px;
   background-color: #ddd9d9;
+}
+
+.intro__filter-img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url("../../images/settings.svg");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: center;
+  -webkit-transition: -webkit-transform 1.5s ease;
+  transition: -webkit-transform 1.5s ease;
+  transition: transform 1.5s ease;
+  transition: transform 1.5s ease, -webkit-transform 1.5s ease;
+}
+.intro__filter-img:hover {
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+.intro__filter-img:focus {
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
 }
 
 .intro__types {
@@ -13843,6 +13890,9 @@ img {
     display: -ms-flexbox;
     display: flex;
   }
+  .intro__types--filter {
+    display: none;
+  }
   .intro__components {
     font-size: 18px;
   }
@@ -13860,6 +13910,9 @@ img {
         -ms-flex-direction: column;
             flex-direction: column;
     row-gap: 3px;
+  }
+  .intro__radios-label--filter {
+    display: none;
   }
   .intro__radios-wrapper {
     display: -webkit-box;
@@ -13923,6 +13976,7 @@ img {
   height: 300px;
   font-size: 24px;
   font-weight: 500;
+  text-align: left;
   color: #777;
 }
 
@@ -14121,6 +14175,10 @@ img {
   }
 }
 /* Modal styles started */
+.modal-dialog {
+  margin: 0.5rem 16px;
+}
+
 .modal-content {
   background: -webkit-gradient(linear, left top, right top, from(#edf2fb), to(#abc4ff));
   background: linear-gradient(0.25turn, #edf2fb, #abc4ff);
@@ -14221,9 +14279,17 @@ img {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin: 3px 0 0;
+  padding: 16px;
   font-weight: 500;
   border-top: 3px solid transparent;
+  border-radius: 0 0 7px 7px;
   background-color: #fee300;
+}
+
+.modal__footer-filter {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
 }
 
 .modal__btn-wrapper {
@@ -14239,4 +14305,9 @@ img {
   width: 100%;
 }
 
+@media only screen and (min-width: 576px) {
+  .modal-dialog {
+    margin: 0.5rem auto;
+  }
+}
 /* Modal styles finished *//*# sourceMappingURL=main.css.map */

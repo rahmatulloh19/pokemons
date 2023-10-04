@@ -15,6 +15,12 @@ const elItemFragment = document.createDocumentFragment();
 const elPokemonsTypeList = document.querySelector(".js-intro__types");
 // input select pokemons
 const elInputPokemonsType = document.querySelector(".js-intro__type");
+// bring filter btn from DOM
+const elFilterBtn = elControlForm.querySelector(".js-intro__filter-btn");
+// bring template file
+const elComponentsForm = document.querySelector(".intro__form-template").content;
+// bring radioElements for sorting
+const radiosElements = document.querySelectorAll(`input[type="radio"]`);
 
 renderPokemons(pokemons, elList);
 
@@ -212,7 +218,10 @@ pokemons.forEach(item => {
 
 // listening the input for rendering
 document.body.addEventListener("click", evt => {
+  // styling input and list
+  // console.log(evt.target);
   if(evt.target.matches(".js-intro__type")) {
+    // console.log("bosildi");
     renderPokemons(pokemonsTypes, elPokemonsTypeList);
     elPokemonsTypeList.classList.add("display-block", "border--top");
     elInputPokemonsType.classList.add("border--bottom");
@@ -221,6 +230,7 @@ document.body.addEventListener("click", evt => {
     elInputPokemonsType.classList.remove("border--bottom");
   }
   
+  // getting value and rendering they
   if(evt.target.matches(".intro__types-item")) {
     const pokemonTypeName = evt.target.textContent.trim();
     elInputPokemonsType.value = pokemonTypeName;
@@ -236,13 +246,6 @@ elInputPokemonsType.addEventListener("keyup", () => {
     
     return lowerCaseItems.includes(elInputPokemonsType.value.trim().toLowerCase())
   })
-  // if(searchingPokemonType.length == 0) {
-  //   elPokemonsTypeList.classList.remove("display-block", "border--top");
-  //   elInputPokemonsType.classList.remove("border--bottom");
-  // } else {
-  //   elPokemonsTypeList.classList.add("display-block", "border--top");
-  //   elInputPokemonsType.classList.add("border--bottom");
-  // }
   
   sorterPokemons(undefined, searchingPokemonType, elPokemonsTypeList);
 })
@@ -250,6 +253,7 @@ elInputPokemonsType.addEventListener("keyup", () => {
 
 const weaknessesPokemons = [];
 
+// collecting all weaknesses in one array
 pokemons.forEach(item => {
   item.weaknesses.forEach(element => {
     if(!weaknessesPokemons.includes(element)) weaknessesPokemons.push(element);
@@ -257,6 +261,7 @@ pokemons.forEach(item => {
 })
 
 function sorterPokemons(value = "default", array = pokemons, node) {
+  // the function is getting 3 arguments they are value, arr, and node
   if(value == "default") {
     const sortedPokemons = array.sort((a, b) => {
       const aCharCode = a.name?.charCodeAt(0) || a.charCodeAt(0);
@@ -277,14 +282,65 @@ function sorterPokemons(value = "default", array = pokemons, node) {
   }
 }
 
-const radiosElements = elControlForm.querySelectorAll(".intro__radios");
-radiosElements.forEach(item => {
-  item.addEventListener("change", evt => {
-    const radioValue = evt.target.value;
-    if(radioValue == "from_A_to_Z") {
-      sorterPokemons("default", undefined, elList)
-    } else if(radioValue == "from_Z_to_A") {
-      sorterPokemons("reverse", undefined, elList)
+
+// listening filter btn 
+elFilterBtn.addEventListener("click", () => {
+  // modal title
+  modalTitle.textContent = "Search settings";
+  
+  // modal body
+  const cloneFormComponents = elComponentsForm.cloneNode(true);
+  const pokemonTypesInput = cloneFormComponents.querySelector(".intro__types-label");
+  pokemonTypesInput.classList.add("intro__types--filter");
+  const pokemonSortInput = cloneFormComponents.querySelector(".intro__radios-label");
+  pokemonSortInput.classList.add("intro__radios-label--filter")
+  modalBody.append(pokemonTypesInput, pokemonSortInput);
+  replaceTag(".modal__body");
+  
+  // modal footer
+  modalFooter.classList.add("modal__footer-filter");
+  modalFooter.innerHTML = `<button class="intro__components intro__modal-btn" type="submit" form="control-form" data-bs-dismiss="modal">Search</button>`
+})
+
+// this copied function isn't mine
+function replaceTag(classes){
+  const that = document.querySelector(classes);
+  
+  const form = document.createElement('form');
+  form.classList.add(`${classes.slice(1)}`, "modal-body", "js-modal__body", "js-modal__body--form")
+  
+  // move all elements in the other container.
+  while(that.firstChild) {
+    form.appendChild(that.firstChild);
+  }
+  that.parentNode.replaceChild(form, that);
+}
+
+elControlForm.addEventListener("submit", evt => {
+  evt.preventDefault();
+  const elFormControlModal = document.querySelector(".js-modal__body--form");
+  const elRadiosModal = elFormControlModal.querySelectorAll(`input[type="radio"]`);
+  let elRadioValue = "asd";
+  
+  // getting style of wrapper radio element
+  const elLabel = document.querySelector(".intro__radios-label")
+  const styleLabel = window.getComputedStyle(elLabel);
+  const propertyStyle = styleLabel.getPropertyValue("display");
+
+  if(propertyStyle == "none") {
+    for (const iterator of  elRadiosModal) {
+      if(iterator.checked) elRadioValue = iterator.value;
     }
-  })
+  } else {
+    for (const iterator of  radiosElements) {
+      if(iterator.checked) elRadioValue = iterator.value;
+    }
+  }
+  
+  if(elRadioValue == "from_A_to_Z") {
+    sorterPokemons("default", undefined, elList)
+  } else if(elRadioValue == "from_Z_to_A") {
+    sorterPokemons("reverse", undefined, elList)
+  }
+  
 })

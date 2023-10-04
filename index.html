@@ -21,29 +21,27 @@
           alt="Wrote pokemon"
           srcset="./images/pokemon.png  1x, ./images/pokemon@2x.png  2x">
         </h1>
-        <form class="intro__form js-intro__form" autocomplete="off">
+        <form class="intro__form js-intro__form" id="control-form" autocomplete="off">
           <input class="intro__search js-intro__search intro__components" type="text" name="user_search" placeholder="Search..."  minlength="1" maxlength="15">
           <label class="intro__types-label">
             <input class="intro__type js-intro__type intro__components" type="text" name="user_type" placeholder="Pokemons types..." minlength="1" maxlength="15">
-            <ul class="intro__types border--top js-intro__types">
-              <li class="intro__types-item">  
-                Grass
-              </li>
-            </ul> 
+            <ul class="intro__types border--top js-intro__types"></ul> 
           </label>
           <label class="intro__radios-label">
             <label class="intro__radios-wrapper" for="fromTo">
-              From A to Z
-              <input class="intro__radios" type="radio" id="fromTo" name="from_to" value="from_A_to_Z">
+              From <mark class="intro__radios-mark">A</mark> to <mark class="intro__radios-mark">Z</mark>
+              <input class="intro__radios js-intro__radios" type="radio" id="fromTo" name="from_to" value="from_A_to_Z">
             </label>
             <label class="intro__radios-wrapper" for="toFrom">
-              From Z to A
-              <input class="intro__radios" type="radio" id="toFrom" name="from_to" value="from_Z_to_A">
+              From <mark class="intro__radios-mark">Z</mark> to <mark class="intro__radios-mark">A</mark>
+              <input class="intro__radios js-intro__radios" type="radio" id="toFrom" name="from_to" value="from_Z_to_A">
             </label>
           </label>
           <div class="intro__btn-wrapper">
             <button class="intro__submit-btn intro__components" type="submit">Search</button>
-            <button class="intro__filter-btn intro__components" type="button"></button>
+            <button class="intro__filter-btn intro__components js-intro__filter-btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <span class="intro__filter-img"></span>
+            </button>
           </div>
         </form>
         
@@ -61,7 +59,7 @@
   
   
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal__dialog modal-dialog">
       <div class="modal__content modal-content">
         <div class="modal__header modal-header">
@@ -110,10 +108,27 @@
             <strong class="pokemons__bold pokemons__bold--eggs"></strong>
             <strong class="pokemons__bold pokemons__bold--type pokemons__bold-left"></strong>
           </div>
-          <a class="pokemons__link" href="#" data-id="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View more</a>
+          <a class="pokemons__link" href="#" data-id="" data-bs-toggle="modal" data-bs-target="#exampleModal">View more</a>
         </div>
       </div>
     </li>
+  </template>
+  <template class="intro__form-template">
+    <label class="intro__types-label">
+      <input class="intro__type js-intro__type intro__components" type="text" name="user_type"
+        placeholder="Pokemons types..." minlength="1" maxlength="15">
+      <ul class="intro__types border--top js-intro__types"></ul>
+    </label>
+    <label class="intro__radios-label">
+      <label class="intro__radios-wrapper" for="fromToModal">
+        From <mark class="intro__radios-mark">A</mark> to <mark class="intro__radios-mark">Z</mark>
+        <input class="intro__radios js-intro__radios" type="radio" id="fromToModal" name="from_to" value="from_A_to_Z">
+      </label>
+      <label class="intro__radios-wrapper" for="toFromModal">
+        From <mark class="intro__radios-mark">Z</mark> to <mark class="intro__radios-mark">A</mark>
+        <input class="intro__radios js-intro__radios" type="radio" id="toFromModal" name="from_to" value="from_Z_to_A">
+      </label>
+    </label>
   </template>
   <!-- <template class="pokemons__modal">
     

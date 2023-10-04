@@ -2,6 +2,10 @@
 
 /* Modal styles started */
 
+.modal-dialog {
+  margin: 0.5rem 16px;
+}
+
 .modal-content {
   background: linear-gradient(0.25turn, #edf2fb, #abc4ff);
   color: #99582a;
@@ -78,9 +82,15 @@
   justify-content: center;
   flex-wrap: wrap;
   margin: 3px 0 0;
+  padding: 16px;
   font-weight: 500;
   border-top: 3px solid transparent;
+  border-radius: 0 0 7px 7px;
   background-color: #fee300;
+}
+
+.modal__footer-filter {
+  justify-content: end;
 }
 
 .modal__btn-wrapper {
@@ -88,6 +98,12 @@
   justify-content: space-between;
   column-gap: 10px;
   width: 100%;
+}
+
+@include m.responsive(576px) {
+  .modal-dialog {
+    margin: 0.5rem auto;
+  }
 }
 
 /* Modal styles finished */
