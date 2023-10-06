@@ -41,7 +41,7 @@
     color: #fff;
     opacity: 1;
   }
-  &:focus{
+  &:focus {
     opacity: 1;
     box-shadow: none;
   }
@@ -53,7 +53,7 @@
   row-gap: 10px;
 }
 
-.modal__list{
+.modal__list {
   @include m.unstyled-list;
 }
 
@@ -65,7 +65,7 @@
   font-weight: 500;
   color: #555;
   border-radius: 10px;
-  transition:background-color 0.5s ease;
+  transition: background-color 0.5s ease;
   &:hover {
     color: #fff;
     background-color: #77777790;

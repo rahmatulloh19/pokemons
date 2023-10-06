@@ -1,146 +1,245 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="images/pokemonswebp.webp" type="image/x-icon">
-  <link rel="stylesheet" href="./css/main.css">
-  <title>Pokemons</title>
-</head>
-<body>
-  <header class="site-header visually-hidden"></header>
-  
-  <main class="site-main">
-    <section class="site-main__intro intro">
-      <div class="container">
-        <h1 class="intro__heading">
-          <!-- Retina image -->
-          <img class="intro__img js-intro__img" src="./images/pokemon.png"
-          width="1200"
-          height="675"
-          alt="Wrote pokemon"
-          srcset="./images/pokemon.png  1x, ./images/pokemon@2x.png  2x">
-        </h1>
-        <form class="intro__form js-intro__form" id="control-form" autocomplete="off">
-          <label class="intro__search-label intro__labels">
-            <input class="intro__search js-intro__search intro__components intro__input-with-lists" type="text" name="user_search" placeholder="Search..."  minlength="1" maxlength="15">
-            <ul class="intro__search-list js-intro__search-list js-intro__target intro__lists intro__input-lists"></ul>
-          </label>
-          <label class="intro__types-label intro__labels">
-            <input class="intro__type js-intro__type intro__components intro__input-with-lists" type="text" name="user_type" placeholder="Pokemons types..." minlength="1" maxlength="15">
-            <ul class="intro__types js-intro__target intro__lists intro__input-lists"></ul> 
-          </label>
-          <label class="intro__radios-label">
-            <label class="intro__radios-wrapper" for="fromTo">
-              From <mark class="intro__radios-mark">A</mark> to <mark class="intro__radios-mark">Z</mark>
-              <input class="intro__radios js-intro__radios" type="radio" id="fromTo" name="from_to" value="from_A_to_Z">
-            </label>
-            <label class="intro__radios-wrapper" for="toFrom">
-              From <mark class="intro__radios-mark">Z</mark> to <mark class="intro__radios-mark">A</mark>
-              <input class="intro__radios js-intro__radios" type="radio" id="toFrom" name="from_to" value="from_Z_to_A">
-            </label>
-          </label>
-          <div class="intro__btn-wrapper">
-            <button class="intro__submit-btn intro__components" type="submit">Search</button>
-            <button class="intro__filter-btn intro__components js-intro__filter-btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <span class="intro__filter-img"></span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-    <section class="site-main__pokemons pokemons">
-      <div class="container">
-        <h2 class="pokemons__title visually-hidden">
-          Pokemons lits
-        </h2>
-        <ol class="pokemons__list js-pokemons__list"></ol>
-      </div>
-    </section>
-  </main>
-  
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal__dialog modal-dialog">
-      <div class="modal__content modal-content">
-        <div class="modal__header modal-header">
-          <h1 class="modal__title modal-title fs-3 js-modal__title" id="exampleModalLabel"></h1>
-          <button type="button" class="modal__btn btn-close" data-bs-dismiss="modal" aria-label="Close">
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill="currentColor"><path d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/></svg>
-          </button>
-        </div>
-        <div class="modal__body modal-body js-modal__body"></div>
-        <div class="modal__footer js-modal__footer fs-5"></div>
-      </div>
-    </div>
-  </div>
-  <!-- Second modal -->
-  <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog">
-      <div class="modal__content modal-content">
-        <div class="modal__header modal-header">
-          <h1 class="modal__title modal-title fs-3 js-second-modal__title" id="exampleModalLabel"></h1>
-          <button type="button" class="modal__btn btn-close" data-bs-dismiss="modal" aria-label="Close">
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill="currentColor"><path d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/></svg>
-          </button>
-        </div>
-        <ul class="modal__body modal-body js-second-modal__body"></ul>
-        <div class="modal__footer modal-footer js-second-modal__footer fs-5"></div>
-      </div>
-    </div>
-  </div>
-  
-  
-  
-  
-  <template class="pokemons__item-template">
-    <li class="pokemons__item">
-      <div class="pokemons__subheading-wrapper">
-        <h3 class="pokemons__subheading"></h3>
-      </div>
-      <div class="pokemons__item-inner">
-        <img class="pokemons__item-img" src="" width="" height="" alt="">
-        <div class="pokemons__item-content">
-          <div class="pokemons__data-wrapper">
-            <strong class="pokemons__bold pokemons__bold--weight"></strong>
-            <strong class="pokemons__bold pokemons__bold--height pokemons__bold-left"></strong>
-          </div>
-          <div class="pokemons__data-wrapper">
-            <strong class="pokemons__bold pokemons__bold--eggs"></strong>
-            <strong class="pokemons__bold pokemons__bold--type pokemons__bold-left"></strong>
-          </div>
-          <a class="pokemons__link" href="#" data-id="" data-bs-toggle="modal" data-bs-target="#exampleModal">View more</a>
-        </div>
-      </div>
-    </li>
-  </template>
-  <template class="intro__form-template">
-    <label class="intro__types-label intro__labels">
-      <input class="intro__type js-intro__type intro__components intro__input-with-lists js-intro__type-modal" type="text" name="user_type" placeholder="Pokemons types..." minlength="1" maxlength="15" autocomplete="off" >
-      <ul class="intro__types js-intro__target intro__lists intro__input-lists js-intro__types-modal"></ul>
-    </label>
-    <label class="intro__radios-label">
-      <label class="intro__radios-wrapper" for="fromToModal">
-        From <mark class="intro__radios-mark">A</mark> to <mark class="intro__radios-mark">Z</mark>
-        <input class="intro__radios js-intro__radios" type="radio" id="fromToModal" name="from_to" value="from_A_to_Z">
-      </label>
-      <label class="intro__radios-wrapper" for="toFromModal">
-        From <mark class="intro__radios-mark">Z</mark> to <mark class="intro__radios-mark">A</mark>
-        <input class="intro__radios js-intro__radios" type="radio" id="toFromModal" name="from_to" value="from_Z_to_A">
-      </label>
-    </label>
-  </template>
-  <!-- <template class="pokemons__modal">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="shortcut icon"
+			href="images/pokemonswebp.webp"
+			type="image/x-icon" />
+		<link rel="stylesheet" href="./css/main.css" />
+		<title>Pokemons</title>
+	</head>
+	<body>
+		<header class="site-header visually-hidden"></header>
+
+		<main class="site-main">
+			<section class="site-main__intro intro">
+				<div class="container">
+					<h1 class="intro__heading">
+						<!-- Retina image -->
+						<img
+							class="intro__img js-intro__img"
+							src="./images/pokemon.png"
+							width="1200"
+							height="675"
+							alt="Wrote pokemon"
+							srcset="./images/pokemon.png 1x, ./images/pokemon@2x.png 2x" />
+					</h1>
+					<form
+						class="intro__form js-intro__form"
+						id="control-form"
+						autocomplete="off">
+						<label class="intro__search-label intro__labels">
+							<input
+								class="intro__search js-intro__search intro__components intro__input-with-lists"
+								type="text"
+								name="user_search"
+								placeholder="Search..."
+								minlength="1"
+								maxlength="15" />
+							<ul
+								class="intro__search-list js-intro__search-list js-intro__target intro__lists intro__input-lists"></ul>
+						</label>
+						<label class="intro__types-label intro__labels">
+							<input
+								class="intro__type js-intro__type intro__components intro__input-with-lists"
+								type="text"
+								name="user_type"
+								placeholder="Pokemons types..."
+								minlength="1"
+								maxlength="15" />
+							<ul
+								class="intro__types js-intro__target intro__lists intro__input-lists"></ul>
+						</label>
+						<label class="intro__radios-label">
+							<label class="intro__radios-wrapper" for="fromTo">
+								From <mark class="intro__radios-mark">A</mark> to
+								<mark class="intro__radios-mark">Z</mark>
+								<input
+									class="intro__radios js-intro__radios"
+									type="radio"
+									id="fromTo"
+									name="from_to"
+									value="from_A_to_Z" />
+							</label>
+							<label class="intro__radios-wrapper" for="toFrom">
+								From <mark class="intro__radios-mark">Z</mark> to
+								<mark class="intro__radios-mark">A</mark>
+								<input
+									class="intro__radios js-intro__radios"
+									type="radio"
+									id="toFrom"
+									name="from_to"
+									value="from_Z_to_A" />
+							</label>
+						</label>
+						<div class="intro__btn-wrapper">
+							<button class="intro__submit-btn intro__components" type="submit">
+								Search
+							</button>
+							<button
+								class="intro__filter-btn intro__components js-intro__filter-btn"
+								type="button"
+								data-bs-toggle="modal"
+								data-bs-target="#exampleModal">
+								<span class="intro__filter-img"></span>
+							</button>
+						</div>
+					</form>
+				</div>
+			</section>
+			<section class="site-main__pokemons pokemons">
+				<div class="container">
+					<h2 class="pokemons__title visually-hidden">Pokemons lits</h2>
+					<ol class="pokemons__list js-pokemons__list"></ol>
+				</div>
+			</section>
+		</main>
+
+		<!-- Modal -->
+		<div
+			class="modal fade"
+			id="exampleModal"
+			tabindex="-1"
+			aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal__dialog modal-dialog">
+				<div class="modal__content modal-content">
+					<div class="modal__header modal-header">
+						<h1
+							class="modal__title modal-title fs-3 js-modal__title"
+							id="exampleModalLabel"></h1>
+						<button
+							type="button"
+							class="modal__btn btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 16 16"
+								fill="currentColor">
+								<path
+									d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z" />
+							</svg>
+						</button>
+					</div>
+					<div class="modal__body modal-body js-modal__body"></div>
+					<div class="modal__footer js-modal__footer fs-5"></div>
+				</div>
+			</div>
+		</div>
+		<!-- Second modal -->
+		<div
+			class="modal fade"
+			id="exampleModalToggle2"
+			data-bs-backdrop="static"
+			data-bs-keyboard="false"
+			tabindex="-1"
+			aria-labelledby="staticBackdropLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog">
+				<div class="modal__content modal-content">
+					<div class="modal__header modal-header">
+						<h1
+							class="modal__title modal-title fs-3 js-second-modal__title"
+							id="exampleModalLabel"></h1>
+						<button
+							type="button"
+							class="modal__btn btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 16 16"
+								fill="currentColor">
+								<path
+									d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z" />
+							</svg>
+						</button>
+					</div>
+					<ul class="modal__body modal-body js-second-modal__body"></ul>
+					<div
+						class="modal__footer modal-footer js-second-modal__footer fs-5"></div>
+				</div>
+			</div>
+		</div>
+
+		<template class="pokemons__item-template">
+			<li class="pokemons__item">
+				<div class="pokemons__subheading-wrapper">
+					<h3 class="pokemons__subheading"></h3>
+				</div>
+				<div class="pokemons__item-inner">
+					<img class="pokemons__item-img" src="" width="" height="" alt="" />
+					<div class="pokemons__item-content">
+						<div class="pokemons__data-wrapper">
+							<strong class="pokemons__bold pokemons__bold--weight"></strong>
+							<strong
+								class="pokemons__bold pokemons__bold--height pokemons__bold-left"></strong>
+						</div>
+						<div class="pokemons__data-wrapper">
+							<strong class="pokemons__bold pokemons__bold--eggs"></strong>
+							<strong
+								class="pokemons__bold pokemons__bold--type pokemons__bold-left"></strong>
+						</div>
+						<a
+							class="pokemons__link"
+							href="#"
+							data-id=""
+							data-bs-toggle="modal"
+							data-bs-target="#exampleModal"
+							>View more</a
+						>
+					</div>
+				</div>
+			</li>
+		</template>
+		<template class="intro__form-template">
+			<label class="intro__types-label intro__labels">
+				<input
+					class="intro__type js-intro__type intro__components intro__input-with-lists js-intro__type-modal"
+					type="text"
+					name="user_type"
+					placeholder="Pokemons types..."
+					minlength="1"
+					maxlength="15"
+					autocomplete="off" />
+				<ul
+					class="intro__types js-intro__target intro__lists intro__input-lists js-intro__types-modal"></ul>
+			</label>
+			<label class="intro__radios-label">
+				<label class="intro__radios-wrapper" for="fromToModal">
+					From <mark class="intro__radios-mark">A</mark> to
+					<mark class="intro__radios-mark">Z</mark>
+					<input
+						class="intro__radios js-intro__radios"
+						type="radio"
+						id="fromToModal"
+						name="from_to"
+						value="from_A_to_Z" />
+				</label>
+				<label class="intro__radios-wrapper" for="toFromModal">
+					From <mark class="intro__radios-mark">Z</mark> to
+					<mark class="intro__radios-mark">A</mark>
+					<input
+						class="intro__radios js-intro__radios"
+						type="radio"
+						id="toFromModal"
+						name="from_to"
+						value="from_Z_to_A" />
+				</label>
+			</label>
+		</template>
+		<!-- <template class="pokemons__modal">
     
   </template> -->
-  
-  
-  <script src="./js/pokemons.js"></script>
-  <script src="./js/bootstrap.min.js"></script>
-  <script src="./js/main.js"></script>
-  
-  <!-- <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+
+		<script src="./js/pokemons.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/main.js"></script>
+
+		<!-- <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -156,8 +255,7 @@
       </div>
     </div>
   </div> -->
-  
-  <!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a> -->
-  
-</body>
+
+		<!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a> -->
+	</body>
 </html>

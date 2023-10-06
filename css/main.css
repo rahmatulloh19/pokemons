@@ -13685,6 +13685,7 @@ img {
 
 .intro__labels {
   position: relative;
+  z-index: 1;
   width: 100%;
 }
 
@@ -13703,7 +13704,7 @@ img {
 .intro__input-lists {
   position: absolute;
   top: 100%;
-  z-index: 1;
+  z-index: 2;
   max-height: 250px;
   width: 100%;
   background-color: #e8dd78;
@@ -13764,6 +13765,7 @@ img {
 
 .intro__radios-label--filter {
   position: relative;
+  z-index: 1;
   display: block;
 }
 
@@ -13907,6 +13909,9 @@ img {
 @media only screen and (min-width: 1280px) {
   .intro__form {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .intro__filter-btn {
+    display: none;
   }
   .intro__radios-label {
     display: -webkit-box;
