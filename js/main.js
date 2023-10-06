@@ -429,6 +429,16 @@ elFilterBtn.addEventListener("click", () => {
 	modalFooter.innerHTML = `<button class="intro__components intro__modal-btn" type="button" form="control-form" data-bs-dismiss="modal">Close</button>`;
 });
 
+radiosElements.forEach((item) => {
+	item.addEventListener("change", () => {
+		if (item.value == "from_A_to_Z") {
+			sorterPokemons(undefined, pokemons, elList);
+		} else if (item.value == "from_Z_to_A") {
+			sorterPokemons("reverse", pokemons, elList);
+		}
+	});
+});
+
 elControlForm.addEventListener("submit", (evt) => {
 	evt.preventDefault();
 
