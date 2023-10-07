@@ -1,3 +1,4 @@
+AOS.init();
 const elControlForm = document.querySelector(".js-intro__form");
 const elSearch = elControlForm.querySelector(".js-intro__search");
 const elList = document.querySelector(".js-pokemons__list");
@@ -34,6 +35,8 @@ function renderPokemons(array, node) {
 		array.filter(function (item) {
 			const templateClone = elItemTemplate.cloneNode(true);
 
+			//  data-aos="zoom-out-up"
+			templateClone.querySelector(".pokemons__item").dataset.aos = "fade-up-left";
 			templateClone.querySelector(".pokemons__item-img").src = item.img;
 			templateClone.querySelector(".pokemons__item-img").width = 120;
 			templateClone.querySelector(".pokemons__item-img").height = 120;
@@ -470,6 +473,4 @@ elControlForm.addEventListener("submit", (evt) => {
 	if (!elSearchValue && !elInputPokemonsType.value) {
 		renderPokemons(pokemons, elList);
 	}
-
-	// codelarni ketma ketligini o'zgartirib abdulaziz akaga ko'rsatishim kerak va typeni search qilsak va alohida pokemonni search qilsak bir vaqtni o'zida manga ko'rsatilgan typeda alohida search qilingan pokemon yo'q digan gap chiqishi kerak
 });

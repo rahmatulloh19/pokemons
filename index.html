@@ -3,10 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link
-			rel="shortcut icon"
-			href="images/pokemonswebp.webp"
-			type="image/x-icon" />
+		<link rel="shortcut icon" href="images/pokemonswebp.webp" type="image/x-icon" />
+		<link rel="stylesheet" href="./aos-master/dist/aos.css" />
 		<link rel="stylesheet" href="./css/main.css" />
 		<title>Pokemons</title>
 	</head>
@@ -26,10 +24,7 @@
 							alt="Wrote pokemon"
 							srcset="./images/pokemon.png 1x, ./images/pokemon@2x.png 2x" />
 					</h1>
-					<form
-						class="intro__form js-intro__form"
-						id="control-form"
-						autocomplete="off">
+					<form class="intro__form js-intro__form" id="control-form" autocomplete="off">
 						<label class="intro__search-label intro__labels">
 							<input
 								class="intro__search js-intro__search intro__components intro__input-with-lists"
@@ -49,8 +44,7 @@
 								placeholder="Pokemons types..."
 								minlength="1"
 								maxlength="15" />
-							<ul
-								class="intro__types js-intro__target intro__lists intro__input-lists"></ul>
+							<ul class="intro__types js-intro__target intro__lists intro__input-lists"></ul>
 						</label>
 						<label class="intro__radios-label">
 							<label class="intro__radios-wrapper" for="fromTo">
@@ -75,9 +69,7 @@
 							</label>
 						</label>
 						<div class="intro__btn-wrapper">
-							<button class="intro__submit-btn intro__components" type="submit">
-								Search
-							</button>
+							<button class="intro__submit-btn intro__components" type="submit">Search</button>
 							<button
 								class="intro__filter-btn intro__components js-intro__filter-btn"
 								type="button"
@@ -107,18 +99,13 @@
 			<div class="modal__dialog modal-dialog">
 				<div class="modal__content modal-content">
 					<div class="modal__header modal-header">
-						<h1
-							class="modal__title modal-title fs-3 js-modal__title"
-							id="exampleModalLabel"></h1>
+						<h1 class="modal__title modal-title fs-3 js-modal__title" id="exampleModalLabel"></h1>
 						<button
 							type="button"
 							class="modal__btn btn-close"
 							data-bs-dismiss="modal"
 							aria-label="Close">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 16 16"
-								fill="currentColor">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
 								<path
 									d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z" />
 							</svg>
@@ -149,18 +136,14 @@
 							class="modal__btn btn-close"
 							data-bs-dismiss="modal"
 							aria-label="Close">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 16 16"
-								fill="currentColor">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
 								<path
 									d="M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z" />
 							</svg>
 						</button>
 					</div>
 					<ul class="modal__body modal-body js-second-modal__body"></ul>
-					<div
-						class="modal__footer modal-footer js-second-modal__footer fs-5"></div>
+					<div class="modal__footer modal-footer js-second-modal__footer fs-5"></div>
 				</div>
 			</div>
 		</div>
@@ -175,13 +158,11 @@
 					<div class="pokemons__item-content">
 						<div class="pokemons__data-wrapper">
 							<strong class="pokemons__bold pokemons__bold--weight"></strong>
-							<strong
-								class="pokemons__bold pokemons__bold--height pokemons__bold-left"></strong>
+							<strong class="pokemons__bold pokemons__bold--height pokemons__bold-left"></strong>
 						</div>
 						<div class="pokemons__data-wrapper">
 							<strong class="pokemons__bold pokemons__bold--eggs"></strong>
-							<strong
-								class="pokemons__bold pokemons__bold--type pokemons__bold-left"></strong>
+							<strong class="pokemons__bold pokemons__bold--type pokemons__bold-left"></strong>
 						</div>
 						<a
 							class="pokemons__link"
@@ -237,6 +218,7 @@
 
 		<script src="./js/pokemons.js"></script>
 		<script src="./js/bootstrap.min.js"></script>
+		<script src="./aos-master/dist/aos.js"></script>
 		<script src="./js/main.js"></script>
 
 		<!-- <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
